@@ -43,6 +43,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Register.this, Login.class));
+                finish();
             }
         });
 
@@ -90,6 +91,10 @@ public class Register extends AppCompatActivity {
                                                 if (!obj.has(user)) {
                                                     reference.child(user).child("password").setValue(pass);
                                                     Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
+                                                    UserDetails.getInstance().username = user;
+                                                    UserDetails.getInstance().password = pass;
+                                                    startActivity(new Intent(Register.this, Users.class));
+                                                    finish();
                                                 } else {
                                                     Toast.makeText(Register.this, "username already exists", Toast.LENGTH_LONG).show();
                                                 }
@@ -115,5 +120,9 @@ public class Register extends AppCompatActivity {
                             }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
