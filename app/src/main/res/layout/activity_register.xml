@@ -7,17 +7,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/backg"
     tools:context="com.realm.Register"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="REGISTER"
         android:textSize="30dp"
         android:gravity="center"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:textColor="#ffffff"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -26,7 +29,9 @@
         android:inputType="text"
         android:maxLines="1"
         android:hint="enter username"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:textColorHint="#dedede"
+        android:textColor="#ffffff"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -35,14 +40,22 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:hint="enter password"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:textColor="#ffffff"
+        android:textColorHint="#dedede"
+        android:textColorHighlight="#dedede"
+        style="@style/Widget.AppCompat.EditText"
+        />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/registerButton"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:textColor="#ffffff"
+        style="@style/Widget.AppCompat.Button.Colored"
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -50,6 +63,7 @@
         android:text="Click here to login"
         android:textSize="20dp"
         android:gravity="center"
-        android:id="@+id/login"/>
+        android:id="@+id/login"
+        android:textColor="#ffffff"/>
 
 </LinearLayout>
