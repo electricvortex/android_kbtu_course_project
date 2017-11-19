@@ -41,8 +41,8 @@ public class Chat extends AppCompatActivity {
         scrollView = (ScrollView)findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
+        reference1 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().username + "_" + UserDetails.getInstance().chatWith);
+        reference2 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().chatWith + "_" + UserDetails.getInstance().username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class Chat extends AppCompatActivity {
                 if(!messageText.equals("")){
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", UserDetails.username);
+                    map.put("user", UserDetails.getInstance().username);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.setText("");
@@ -72,6 +72,7 @@ public class Chat extends AppCompatActivity {
                 }
                 else{
                     addMessageBox(UserDetails.chatWith + ":\n" + message, 2);
+
                 }
             }
 

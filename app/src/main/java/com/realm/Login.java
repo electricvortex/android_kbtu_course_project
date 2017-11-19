@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register.class));
+                finish();
             }
         });
 
@@ -75,9 +76,10 @@ public class Login extends AppCompatActivity {
                                         Toast.makeText(Login.this, "user not found", Toast.LENGTH_LONG).show();
                                     }
                                     else if(obj.getJSONObject(user).getString("password").equals(pass)){
-                                        UserDetails.username = user;
-                                        UserDetails.password = pass;
+                                        UserDetails.getInstance().username = user;
+                                        UserDetails.getInstance().password = pass;
                                         startActivity(new Intent(Login.this, Users.class));
+                                        finish();
                                     }
                                     else {
                                         Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
@@ -103,5 +105,9 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

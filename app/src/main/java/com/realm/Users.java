@@ -62,10 +62,14 @@ public class Users extends AppCompatActivity {
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = al.get(position);
+                UserDetails.getInstance().chatWith = al.get(position);
                 startActivity(new Intent(Users.this, Chat.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public void doOnSuccess(String s){
@@ -78,7 +82,7 @@ public class Users extends AppCompatActivity {
             while(i.hasNext()){
                 key = i.next().toString();
 
-                if(!key.equals(UserDetails.username)) {
+                if(!key.equals(UserDetails.getInstance().username)) {
                     al.add(key);
                 }
 
