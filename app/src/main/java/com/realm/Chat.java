@@ -67,11 +67,12 @@ public class Chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
-                if(userName.equals(UserDetails.getInstance().username)){
-                    addMessageBox("You:-\n" + message, 1);
+                if(userName.equals(UserDetails.username)){
+                    addMessageBox("You:\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.getInstance().chatWith + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWith + ":\n" + message, 2);
+
                 }
             }
 
