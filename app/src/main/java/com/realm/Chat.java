@@ -17,6 +17,8 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +31,7 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
+    ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,27 @@ public class Chat extends AppCompatActivity {
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout)findViewById(R.id.layout2);
         sendButton = (ImageView)findViewById(R.id.sendButton);
+        avatar = (ImageView)findViewById(R.id.avatar);
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
         reference1 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().username + "_" + UserDetails.getInstance().chatWith);
         reference2 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().chatWith + "_" + UserDetails.getInstance().username);
+
+        reference1.child("imgURL").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Picasso.with(Chat.this).load(dataSnapshot.getValue(String.class)).into(avatar);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
