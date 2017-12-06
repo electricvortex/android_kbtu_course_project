@@ -1,5 +1,6 @@
 package com.realm;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -67,11 +68,11 @@ public class Chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
-                if(userName.equals(UserDetails.username)){
+                if(userName.equals(UserDetails.getInstance().username)){
                     addMessageBox("You:\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + ":\n" + message, 2);
+                    addMessageBox(UserDetails.getInstance().chatWith + ":\n" + message, 2);
 
                 }
             }
@@ -106,12 +107,14 @@ public class Chat extends AppCompatActivity {
         lp2.weight = 1.0f;
 
         if(type == 1) {
-            lp2.gravity = Gravity.LEFT;
+            lp2.gravity = Gravity.RIGHT;
             textView.setBackgroundResource(R.drawable.bubble_in);
+            textView.setTextColor(Color.BLACK);
         }
         else{
-            lp2.gravity = Gravity.RIGHT;
+            lp2.gravity = Gravity.LEFT;
             textView.setBackgroundResource(R.drawable.bubble_out);
+            textView.setTextColor(Color.BLACK);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
