@@ -26,6 +26,12 @@
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
                   android:id="@+id/layout1">
+
+                  <ImageView
+                      android:id="@+id/avatar"
+                      android:src="@mipmap/ic_launcher"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" />
               </LinearLayout>
         </RelativeLayout>
     </ScrollView>
