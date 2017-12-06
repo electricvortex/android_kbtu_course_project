@@ -13,10 +13,21 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +40,7 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
+    ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +50,46 @@ public class Chat extends AppCompatActivity {
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout)findViewById(R.id.layout2);
         sendButton = (ImageView)findViewById(R.id.sendButton);
+        avatar = (ImageView)findViewById(R.id.avatar);
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
         reference1 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().username + "_" + UserDetails.getInstance().chatWith);
         reference2 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().chatWith + "_" + UserDetails.getInstance().username);
+
+        String urll = "https://realm-dab25.firebaseio.com/users.json";
+        StringRequest request = new StringRequest(Request.Method.GET, urll, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String s) {
+                if(!s.equals("null")){
+                    try {
+
+                        String user = UserDetails.getInstance().chatWith;
+                        JSONObject obj = new JSONObject(s);
+
+                        String imgUrl = obj.getJSONObject(user).getString("imgURL");
+
+                        Picasso.with(Chat.this).load(imgUrl).into(avatar);
+
+                        String eboy = imgUrl;
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                System.out.println("" + volleyError);
+            }
+        });
+
+        RequestQueue rQueue = Volley.newRequestQueue(Chat.this);
+        rQueue.add(request);
+
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
