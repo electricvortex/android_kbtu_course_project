@@ -58,38 +58,6 @@ public class Chat extends AppCompatActivity {
         reference1 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().username + "_" + UserDetails.getInstance().chatWith);
         reference2 = new Firebase("https://realm-dab25.firebaseio.com/messages/" + UserDetails.getInstance().chatWith + "_" + UserDetails.getInstance().username);
 
-        String urll = "https://realm-dab25.firebaseio.com/users.json";
-        StringRequest request = new StringRequest(Request.Method.GET, urll, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-                if(!s.equals("null")){
-                    try {
-
-                        String user = UserDetails.getInstance().chatWith;
-                        JSONObject obj = new JSONObject(s);
-
-                        String imgUrl = obj.getJSONObject(user).getString("imgURL");
-
-                        Picasso.with(Chat.this).load(imgUrl).into(avatar);
-
-                        String eboy = imgUrl;
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                System.out.println("" + volleyError);
-            }
-        });
-
-        RequestQueue rQueue = Volley.newRequestQueue(Chat.this);
-        rQueue.add(request);
-
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

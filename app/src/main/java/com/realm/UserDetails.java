@@ -2,7 +2,7 @@ package com.realm;
 
 public class UserDetails {
     // private constructor
-    private UserDetails() {
+    public UserDetails() {
 
     }
 
@@ -18,4 +18,5 @@ public class UserDetails {
     public String username = "";
     public String password = "";
     public String chatWith = "";
+    public String avatar = "";
 }

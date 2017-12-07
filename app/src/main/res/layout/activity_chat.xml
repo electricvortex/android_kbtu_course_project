@@ -12,6 +12,13 @@
     tools:context="com.realm.Chat"
     >
 
+
+    <!--<ImageView-->
+        <!--android:id="@+id/avatar"-->
+        <!--android:src="@mipmap/ic_launcher"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp" />-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_weight="20"
@@ -27,11 +34,6 @@
                   android:orientation="vertical"
                   android:id="@+id/layout1">
 
-                  <ImageView
-                      android:id="@+id/avatar"
-                      android:src="@mipmap/ic_launcher"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content" />
               </LinearLayout>
         </RelativeLayout>
     </ScrollView>
